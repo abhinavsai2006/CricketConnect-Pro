@@ -222,37 +222,38 @@ export default function NotificationDropdown() {
                             <h4 className="font-bold text-gray-900 text-base sm:text-lg mb-1.5 flex items-center leading-tight">
                               {notification.title}
                               {!notification.isRead && (
-                              <span className="ml-2.5 w-2.5 h-2.5 bg-cricket-green-500 rounded-full flex-shrink-0 animate-pulse"></span>
-                            )}
-                          </h4>
-                          <p className="text-gray-700 text-sm sm:text-base mb-2.5 line-clamp-2 leading-relaxed">{notification.message}</p>
-                          <p className="text-gray-500 text-xs sm:text-sm font-medium">{notification.time}</p>
-                        </div>
+                                <span className="ml-2.5 w-2.5 h-2.5 bg-cricket-green-500 rounded-full flex-shrink-0 animate-pulse"></span>
+                              )}
+                            </h4>
+                            <p className="text-gray-700 text-sm sm:text-base mb-2.5 line-clamp-2 leading-relaxed">{notification.message}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm font-medium">{notification.time}</p>
+                          </div>
 
-                        {/* Actions */}
-                        <div className="flex items-center space-x-1.5 flex-shrink-0">
-                          {!notification.isRead && (
+                          {/* Actions */}
+                          <div className="flex items-center space-x-1.5 flex-shrink-0">
+                            {!notification.isRead && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  markAsRead(notification.id);
+                                }}
+                                className="p-2.5 text-gray-400 hover:text-cricket-green-600 hover:bg-cricket-green-100 rounded-lg transition-all duration-200 touch-manipulation"
+                                title="Mark as read"
+                              >
+                                <Check className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
+                              </button>
+                            )}
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                markAsRead(notification.id);
+                                removeNotification(notification.id);
                               }}
-                              className="p-2.5 text-gray-400 hover:text-cricket-green-600 hover:bg-cricket-green-100 rounded-lg transition-all duration-200 touch-manipulation"
-                              title="Mark as read"
+                              className="p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-100 rounded-lg transition-all duration-200 touch-manipulation"
+                              title="Remove"
                             >
-                              <Check className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
+                              <X className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
                             </button>
-                          )}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeNotification(notification.id);
-                            }}
-                            className="p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-100 rounded-lg transition-all duration-200 touch-manipulation"
-                            title="Remove"
-                          >
-                            <X className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
-                          </button>
+                          </div>
                         </div>
                       </div>
                     </div>
