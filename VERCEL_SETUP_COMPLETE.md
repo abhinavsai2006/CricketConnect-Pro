@@ -86,8 +86,8 @@ In Vercel Dashboard → Settings → Environment Variables:
 
 | Variable | Value | Notes |
 |----------|-------|-------|
-| `MOCHA_USERS_SERVICE_API_URL` | `https://users-service.mocha.run` | Required |
-| `MOCHA_USERS_SERVICE_API_KEY` | Your API key | Required |
+| `AUTH_SERVICE_API_URL` | `https://users-service.mocha.run` | Required |
+| `AUTH_SERVICE_API_KEY` | Your API key | Required |
 
 ### 4. **Optional: Setup Database**
 ```bash

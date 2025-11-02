@@ -24,8 +24,8 @@ Use this checklist to ensure smooth deployment:
 
 Configure in Vercel Dashboard → Settings → Environment Variables:
 
-- [ ] `MOCHA_USERS_SERVICE_API_URL` set to `https://users-service.mocha.run`
-- [ ] `MOCHA_USERS_SERVICE_API_KEY` set (get from Mocha dashboard)
+- [ ] `AUTH_SERVICE_API_URL` set to `https://users-service.mocha.run`
+- [ ] `AUTH_SERVICE_API_KEY` set (get from authentication service dashboard)
 - [ ] Variables applied to: **Production**, **Preview**, **Development**
 
 ## First Deployment

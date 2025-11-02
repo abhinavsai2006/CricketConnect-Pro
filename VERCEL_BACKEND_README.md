@@ -69,8 +69,8 @@ vercel --prod
 In Vercel Dashboard → Your Project → Settings → Environment Variables:
 
 ```
-MOCHA_USERS_SERVICE_API_URL=https://users-service.mocha.run
-MOCHA_USERS_SERVICE_API_KEY=your_api_key_here
+AUTH_SERVICE_API_URL=https://users-service.mocha.run
+AUTH_SERVICE_API_KEY=your_api_key_here
 ```
 
 ## 📊 Database Setup (Optional but Recommended)
@@ -131,8 +131,8 @@ Access at: `https://your-app.vercel.app/api/teams`
 
 ### Required
 ```env
-MOCHA_USERS_SERVICE_API_URL=https://users-service.mocha.run
-MOCHA_USERS_SERVICE_API_KEY=your_api_key
+AUTH_SERVICE_API_URL=https://users-service.mocha.run
+AUTH_SERVICE_API_KEY=your_api_key
 ```
 
 ### Optional (if using Vercel Postgres)

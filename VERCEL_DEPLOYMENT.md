@@ -26,8 +26,8 @@
 
 3. **Configure Environment Variables**
    In Vercel project settings, add these environment variables:
-   - `MOCHA_USERS_SERVICE_API_URL` - Your Mocha Users Service URL
-   - `MOCHA_USERS_SERVICE_API_KEY` - Your Mocha API Key
+   - `AUTH_SERVICE_API_URL` - Your Authentication Service URL
+   - `AUTH_SERVICE_API_KEY` - Your Authentication API Key
 
 4. **Deploy**
    - Click "Deploy"
@@ -52,8 +52,8 @@
 
 4. **Set Environment Variables**
    ```bash
-   vercel env add MOCHA_USERS_SERVICE_API_URL
-   vercel env add MOCHA_USERS_SERVICE_API_KEY
+   vercel env add AUTH_SERVICE_API_URL
+   vercel env add AUTH_SERVICE_API_KEY
    ```
 
 5. **Deploy to Production**
@@ -98,8 +98,8 @@ vercel kv create
 ## Environment Variables Required
 
 ```env
-MOCHA_USERS_SERVICE_API_URL=https://users-service.mocha.run
-MOCHA_USERS_SERVICE_API_KEY=your_api_key_here
+AUTH_SERVICE_API_URL=https://users-service.mocha.run
+AUTH_SERVICE_API_KEY=your_api_key_here
 ```
 
 ## Post-Deployment

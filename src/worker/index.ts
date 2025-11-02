@@ -12,8 +12,8 @@ import {
 
 interface Env {
   DB: any; // D1Database type
-  MOCHA_USERS_SERVICE_API_URL: string; // Environment variable name from external service
-  MOCHA_USERS_SERVICE_API_KEY: string; // Environment variable name from external service
+  AUTH_SERVICE_API_URL: string;
+  AUTH_SERVICE_API_KEY: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -22,8 +22,8 @@ const app = new Hono<{ Bindings: Env }>();
 app.get('/api/oauth/google/redirect_url', async (c) => {
   try {
     const redirectUrl = await getOAuthRedirectUrl('google', {
-      apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-      apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+      apiUrl: c.env.AUTH_SERVICE_API_URL,
+      apiKey: c.env.AUTH_SERVICE_API_KEY,
     });
 
     return c.json({ redirectUrl }, 200);
@@ -42,8 +42,8 @@ app.post("/api/sessions", async (c) => {
     }
 
     const sessionToken = await exchangeCodeForSessionToken(body.code, {
-      apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-      apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+      apiUrl: c.env.AUTH_SERVICE_API_URL,
+      apiKey: c.env.AUTH_SERVICE_API_KEY,
     });
 
     setCookie(c, SESSION_TOKEN_COOKIE_NAME, sessionToken, {
@@ -70,8 +70,8 @@ app.get('/api/logout', async (c) => {
 
   if (typeof sessionToken === 'string') {
     await deleteSession(sessionToken, {
-      apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-      apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+      apiUrl: c.env.AUTH_SERVICE_API_URL,
+      apiKey: c.env.AUTH_SERVICE_API_KEY,
     });
   }
 

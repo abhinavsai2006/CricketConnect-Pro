@@ -16,8 +16,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const apiUrl = process.env.MOCHA_USERS_SERVICE_API_URL || 'https://users-service.mocha.run';
-    const apiKey = process.env.MOCHA_USERS_SERVICE_API_KEY;
+    const apiUrl = process.env.AUTH_SERVICE_API_URL || 'https://users-service.mocha.run';
+    const apiKey = process.env.AUTH_SERVICE_API_KEY;
 
     if (!apiKey) {
       return res.status(500).json({ error: 'Missing API configuration' });

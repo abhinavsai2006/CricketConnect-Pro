@@ -51,8 +51,8 @@ In Vercel Dashboard → Settings → Environment Variables, add:
 
 | Variable | Value |
 |----------|-------|
-| `MOCHA_USERS_SERVICE_API_URL` | `https://users-service.mocha.run` |
-| `MOCHA_USERS_SERVICE_API_KEY` | Your API key |
+| `AUTH_SERVICE_API_URL` | `https://users-service.mocha.run` |
+| `AUTH_SERVICE_API_KEY` | Your API key |
 
 ## 4️⃣ Redeploy (if you added env vars after first deploy)
 
