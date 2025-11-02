@@ -5,6 +5,5 @@ node_modules
 *.log
 .wrangler
 migrations
-src/worker
 wrangler.jsonc
 *.sql
