@@ -88,8 +88,16 @@ export default function Signup() {
       newErrors.phone = "Phone number must be 10 digits";
     }
 
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = "Date of birth is required";
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     if (!agreeTerms) {
@@ -310,19 +318,21 @@ export default function Signup() {
           <p className="text-gray-600 text-sm sm:text-base">Join thousands of cricket enthusiasts on CricketConnect Pro</p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
-            <span className="text-gray-600 font-medium">Step {['email', 'otp', 'password', 'profile', 'preferences'].indexOf(currentStep) + 1} of 5</span>
-            <span className="text-cricket-green-600 font-semibold">{Math.round(getProgressPercentage())}%</span>
+        {/* Progress Bar - Hidden on first step */}
+        {currentStep !== 'email' && (
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
+              <span className="text-gray-600 font-medium">Step {['email', 'otp', 'password', 'profile', 'preferences'].indexOf(currentStep) + 1} of 5</span>
+              <span className="text-cricket-green-600 font-semibold">{Math.round(getProgressPercentage())}%</span>
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 transition-all duration-500 ease-out rounded-full"
+                style={{ width: `${getProgressPercentage()}%` }}
+              ></div>
+            </div>
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 transition-all duration-500 ease-out rounded-full"
-              style={{ width: `${getProgressPercentage()}%` }}
-            ></div>
-          </div>
-        </div>
+        )}
 
         {/* Signup Form */}
         <div className="cricket-card p-6 sm:p-8 scale-in">
@@ -433,23 +443,16 @@ export default function Signup() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type="password"
                     id="password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-12 py-3 border ${
+                    className={`w-full pl-10 pr-4 py-3 border ${
                       errors.password ? 'border-red-500' : 'border-gray-300'
                     } rounded-lg focus:ring-2 focus:ring-cricket-green-500 focus:border-transparent transition-all duration-200`}
                     placeholder="Min. 6 characters"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
                 </div>
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-500">{errors.password}</p>
@@ -464,23 +467,16 @@ export default function Signup() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
-                    type={showConfirmPassword ? "text" : "password"}
+                    type="password"
                     id="confirmPassword"
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className={`w-full pl-10 pr-12 py-3 border ${
+                    className={`w-full pl-10 pr-4 py-3 border ${
                       errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
                     } rounded-lg focus:ring-2 focus:ring-cricket-green-500 focus:border-transparent transition-all duration-200`}
                     placeholder="Re-enter password"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
                 </div>
                 {errors.confirmPassword && (
                   <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
