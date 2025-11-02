@@ -137,14 +137,14 @@ export default function BookingHistoryModal({ isOpen, onClose }: BookingHistoryM
   // If viewing details, show detail view instead of list
   if (selectedBookingDetails) {
     return (
-      <div className="fixed inset-0 bg-white z-50 flex flex-col">
+      <div className="fixed inset-0 bg-white z-50 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="flex-none bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sm:p-6">
+        <div className="flex-none bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sm:p-6 shadow-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 flex-1 min-w-0">
               <button 
                 onClick={() => setSelectedBookingDetails(null)}
-                className="text-white hover:bg-white/20 p-2 rounded-lg touch-manipulation active:scale-95"
+                className="text-white hover:bg-white/20 p-2 rounded-lg touch-manipulation active:scale-95 flex-shrink-0"
               >
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
@@ -153,15 +153,15 @@ export default function BookingHistoryModal({ isOpen, onClose }: BookingHistoryM
                 <p className="text-white/80 text-xs sm:text-sm">ID: #{selectedBookingDetails.id}</p>
               </div>
             </div>
-            <div className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(selectedBookingDetails.status)}`}>
+            <div className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ${getStatusColor(selectedBookingDetails.status)}`}>
               {selectedBookingDetails.status.charAt(0).toUpperCase() + selectedBookingDetails.status.slice(1)}
             </div>
           </div>
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto overscroll-none">
-          <div className="max-w-4xl mx-auto p-4 sm:p-6 space-y-4 pb-[env(safe-area-inset-bottom,80px)] sm:pb-6">
+        <div className="flex-1 overflow-y-auto overscroll-none bg-gray-50">
+          <div className="max-w-4xl mx-auto p-4 sm:p-6 space-y-4 pb-20 sm:pb-6">
             {/* Ground Information */}
             <div className="cricket-card bg-gradient-to-br from-cricket-green-50 to-cricket-blue-50 p-4 sm:p-6">
               <div className="flex items-start space-x-3 sm:space-x-4">
@@ -352,22 +352,23 @@ export default function BookingHistoryModal({ isOpen, onClose }: BookingHistoryM
 
   // Show bookings list
   return (
-    <div className="fixed inset-0 bg-white z-50 overflow-y-auto safe-area-inset-top safe-area-inset-bottom">
-      <div className="min-h-screen pb-safe">
-        {/* Sticky header with gradient */}
-        <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sm:p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg">
-          <div className="flex-1 min-w-0 mr-3">
-            <h3 className="text-lg sm:text-2xl font-bold text-white truncate">My Bookings</h3>
-            <p className="text-white/80 mt-0.5 sm:mt-1 text-xs sm:text-sm">View and manage your ground bookings</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200 touch-manipulation active:scale-95 flex-shrink-0"
-          >
-            <X className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
+    <div className="fixed inset-0 bg-white z-50 flex flex-col overflow-hidden">
+      {/* Sticky header with gradient */}
+      <div className="flex-none bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sm:p-6 flex items-center justify-between shadow-lg">
+        <div className="flex-1 min-w-0 mr-3">
+          <h3 className="text-lg sm:text-2xl font-bold text-white truncate">My Bookings</h3>
+          <p className="text-white/80 mt-0.5 sm:mt-1 text-xs sm:text-sm">View and manage your ground bookings</p>
         </div>
+        <button
+          onClick={onClose}
+          className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200 touch-manipulation active:scale-95 flex-shrink-0"
+        >
+          <X className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+      </div>
 
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto overscroll-none bg-gray-50">
         <div className="max-w-6xl mx-auto p-3 sm:p-6 lg:p-12">
           {/* Filter Controls */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
