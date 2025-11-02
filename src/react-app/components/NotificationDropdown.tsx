@@ -124,11 +124,12 @@ export default function NotificationDropdown() {
       {/* Notification Bell */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 text-gray-600 hover:text-cricket-green-700 hover:bg-cricket-green-50 rounded-lg transition-all duration-200"
+        className="relative p-2 text-gray-600 hover:text-cricket-green-700 hover:bg-cricket-green-50 rounded-lg transition-all duration-200 touch-manipulation"
+        aria-label="Open notifications"
       >
-        <Bell className="w-5 h-5" />
+        <Bell className="w-5 h-5 sm:w-6 sm:h-6" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
+          <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -136,9 +137,14 @@ export default function NotificationDropdown() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="fixed md:absolute right-0 md:right-0 top-0 md:top-auto md:mt-2 w-full md:w-96 h-full md:h-auto md:max-h-[600px] bg-white md:rounded-xl shadow-2xl border-0 md:border border-gray-200 z-[100] overflow-hidden animate-in fade-in slide-in-from-right md:slide-in-from-top-2 duration-200">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4">
+        <>
+          {/* Mobile Overlay */}
+          <div className="md:hidden fixed inset-0 bg-black/50 z-[90]" onClick={() => setIsOpen(false)} />
+          
+          {/* Dropdown Panel */}
+          <div className="fixed md:absolute left-0 right-0 md:right-0 top-0 md:top-auto md:left-auto md:mt-2 w-full md:w-96 h-full md:h-auto md:max-h-[600px] bg-white md:rounded-xl shadow-2xl border-0 md:border border-gray-200 z-[100] overflow-hidden animate-in fade-in slide-in-from-top md:slide-in-from-top-2 duration-200">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sticky top-0 z-10">
             <div className="flex items-center justify-between">
               <div className="flex-1">
                 <h3 className="font-bold text-white text-lg">Notifications</h3>
@@ -166,7 +172,7 @@ export default function NotificationDropdown() {
           </div>
 
           {/* Notifications List */}
-          <div className="h-[calc(100vh-180px)] md:max-h-96 overflow-y-auto">
+          <div className="h-[calc(100vh-140px)] md:max-h-96 overflow-y-auto overscroll-contain">
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
                 <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
@@ -230,13 +236,14 @@ export default function NotificationDropdown() {
 
           {/* Footer */}
           {notifications.length > 0 && (
-            <div className="p-3 bg-gray-50 border-t border-gray-200">
+            <div className="p-3 bg-gray-50 border-t border-gray-200 sticky bottom-0">
               <button className="w-full text-center text-cricket-green-600 hover:text-cricket-green-700 font-medium text-sm py-2 hover:bg-white rounded-lg transition-all duration-200">
                 View All Notifications
               </button>
             </div>
           )}
-        </div>
+          </div>
+        </>
       )}
     </div>
   );
