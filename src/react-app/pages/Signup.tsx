@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-import { Trophy, Mail, Lock, Eye, EyeOff, User, Phone, MapPin, ArrowRight, Check, ArrowLeft, Calendar, Award, Activity } from "lucide-react";
+import { Trophy, Mail, Lock, Eye, EyeOff, User, Phone, MapPin, ArrowRight, Check, ArrowLeft } from "lucide-react";
 import CricketLoadingSpinner from "../components/CricketLoadingSpinner";
 
 type SignupStep = 'email' | 'otp' | 'password' | 'profile' | 'preferences';
@@ -54,7 +54,6 @@ export default function Signup() {
   
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [generatedOtp, setGeneratedOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
   
   const [showPassword, setShowPassword] = useState(false);
@@ -151,13 +150,12 @@ export default function Signup() {
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Generate random 6-digit OTP
+    // Generate random 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     setGeneratedOtp(otp);
-    setOtpSent(true);
     setResendTimer(60);
     setCurrentStep('otp');
     setIsLoading(false);
-
     // In production, send email via backend
     console.log('OTP sent to email:', formData.email, 'OTP:', otp);
     alert(`Demo OTP: ${otp}\n\nIn production, this will be sent to your email.`);
