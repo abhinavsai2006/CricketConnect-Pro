@@ -60,14 +60,25 @@ export default function NotificationDropdown() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      // Only handle click outside on desktop (md and up)
+      if (window.innerWidth >= 768 && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      // Prevent body scroll on mobile when notification is open
+      if (window.innerWidth < 768) {
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
@@ -139,91 +150,104 @@ export default function NotificationDropdown() {
       {isOpen && (
         <>
           {/* Mobile Overlay */}
-          <div className="md:hidden fixed inset-0 bg-black/50 z-[90]" onClick={() => setIsOpen(false)} />
+          <div 
+            className="md:hidden fixed inset-0 bg-black/60 z-[999]" 
+            onClick={() => setIsOpen(false)}
+            style={{ touchAction: 'none' }}
+          />
           
           {/* Dropdown Panel */}
-          <div className="fixed md:absolute left-0 right-0 md:right-0 top-0 md:top-auto md:left-auto md:mt-2 w-full md:w-96 h-full md:h-auto md:max-h-[600px] bg-white md:rounded-xl shadow-2xl border-0 md:border border-gray-200 z-[100] overflow-hidden animate-in fade-in slide-in-from-top md:slide-in-from-top-2 duration-200">
+          <div className="fixed md:absolute left-0 right-0 md:right-0 top-0 md:top-auto md:left-auto md:mt-2 w-full md:w-96 h-full md:h-auto md:max-h-[600px] bg-white md:rounded-xl shadow-2xl border-0 md:border border-gray-200 z-[1000] overflow-hidden animate-in fade-in slide-in-from-top-5 md:slide-in-from-top-2 duration-300">
             {/* Header */}
-            <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sticky top-0 z-10">
+            <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4 sm:p-6 sticky top-0 z-10 shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <h3 className="font-bold text-white text-lg">Notifications</h3>
-                <p className="text-white/80 text-sm">{unreadCount} unread</p>
+                <h3 className="font-bold text-white text-xl sm:text-2xl">Notifications</h3>
+                <p className="text-white/90 text-sm sm:text-base mt-1">{unreadCount} unread</p>
               </div>
               <div className="flex items-center space-x-2">
                 {unreadCount > 0 && (
                   <button
                     onClick={markAllAsRead}
-                    className="text-white hover:bg-white/20 px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 hidden md:flex items-center space-x-1"
+                    className="text-white hover:bg-white/20 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 hidden md:flex items-center space-x-1"
                   >
                     <Check className="w-4 h-4" />
                     <span>Mark all read</span>
                   </button>
                 )}
                 <button
-                  onClick={() => setIsOpen(false)}
-                  className="md:hidden p-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpen(false);
+                  }}
+                  className="p-2 sm:p-3 text-white hover:bg-white/20 rounded-lg transition-all duration-200 touch-manipulation"
                   aria-label="Close notifications"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6 sm:w-7 sm:h-7" />
                 </button>
               </div>
             </div>
           </div>
 
           {/* Notifications List */}
-          <div className="h-[calc(100vh-140px)] md:max-h-96 overflow-y-auto overscroll-contain">
+          <div className="h-[calc(100vh-160px)] sm:h-[calc(100vh-180px)] md:max-h-96 overflow-y-auto overscroll-contain bg-gray-50">
             {notifications.length === 0 ? (
-              <div className="p-8 text-center">
-                <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500 font-medium">No notifications</p>
-                <p className="text-gray-400 text-sm">You're all caught up!</p>
+              <div className="p-12 sm:p-16 text-center">
+                <Bell className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-600 font-semibold text-lg">No notifications</p>
+                <p className="text-gray-500 text-sm mt-2">You're all caught up!</p>
               </div>
             ) : (
               notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 border-b border-gray-100 hover:bg-gray-50 transition-all duration-200 ${
-                    !notification.isRead ? "bg-cricket-green-50/30" : ""
+                  className={`p-4 sm:p-5 border-b border-gray-200 hover:bg-white transition-all duration-200 cursor-pointer active:bg-gray-100 ${
+                    !notification.isRead ? "bg-white" : "bg-gray-50/50"
                   }`}
                 >
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-start space-x-3 sm:space-x-4">
                     {/* Icon */}
-                    <div className={`w-10 h-10 ${getIconBg(notification.type)} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                    <div className={`w-11 h-11 sm:w-12 sm:h-12 ${getIconBg(notification.type)} rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm`}>
                       {getIcon(notification.type)}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-800 text-sm mb-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-gray-900 text-sm sm:text-base mb-1 flex items-center">
                             {notification.title}
                             {!notification.isRead && (
-                              <span className="ml-2 w-2 h-2 bg-cricket-green-500 rounded-full inline-block"></span>
+                              <span className="ml-2 w-2 h-2 bg-cricket-green-500 rounded-full flex-shrink-0 animate-pulse"></span>
                             )}
                           </h4>
-                          <p className="text-gray-600 text-sm mb-1">{notification.message}</p>
-                          <p className="text-gray-400 text-xs">{notification.time}</p>
+                          <p className="text-gray-600 text-sm sm:text-base mb-2 line-clamp-2">{notification.message}</p>
+                          <p className="text-gray-500 text-xs sm:text-sm">{notification.time}</p>
                         </div>
 
                         {/* Actions */}
-                        <div className="flex items-center space-x-1 ml-2">
+                        <div className="flex items-center space-x-1 flex-shrink-0">
                           {!notification.isRead && (
                             <button
-                              onClick={() => markAsRead(notification.id)}
-                              className="p-1 text-gray-400 hover:text-cricket-green-600 hover:bg-cricket-green-100 rounded transition-all duration-200"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                markAsRead(notification.id);
+                              }}
+                              className="p-2 text-gray-400 hover:text-cricket-green-600 hover:bg-cricket-green-100 rounded-lg transition-all duration-200 touch-manipulation"
                               title="Mark as read"
                             >
-                              <Check className="w-4 h-4" />
+                              <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                           )}
                           <button
-                            onClick={() => removeNotification(notification.id)}
-                            className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-100 rounded transition-all duration-200"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeNotification(notification.id);
+                            }}
+                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-100 rounded-lg transition-all duration-200 touch-manipulation"
                             title="Remove"
                           >
-                            <X className="w-4 h-4" />
+                            <X className="w-4 h-4 sm:w-5 sm:h-5" />
                           </button>
                         </div>
                       </div>
@@ -236,8 +260,8 @@ export default function NotificationDropdown() {
 
           {/* Footer */}
           {notifications.length > 0 && (
-            <div className="p-3 bg-gray-50 border-t border-gray-200 sticky bottom-0">
-              <button className="w-full text-center text-cricket-green-600 hover:text-cricket-green-700 font-medium text-sm py-2 hover:bg-white rounded-lg transition-all duration-200">
+            <div className="p-4 bg-white border-t border-gray-200 sticky bottom-0 shadow-lg">
+              <button className="w-full text-center text-cricket-green-600 hover:text-cricket-green-700 font-semibold text-sm sm:text-base py-3 hover:bg-cricket-green-50 rounded-lg transition-all duration-200 touch-manipulation">
                 View All Notifications
               </button>
             </div>
