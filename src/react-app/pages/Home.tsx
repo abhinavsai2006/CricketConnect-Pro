@@ -1,9 +1,10 @@
 import { useAuth } from "@getmocha/users-service/react";
-import { Trophy, Users, Calendar, MapPin, Star, TrendingUp, Mail, Activity, Target, Clock, Zap, Award, ArrowUpRight, PlayCircle, Menu } from "lucide-react";
+import { Trophy, Users, Calendar, MapPin, Star, TrendingUp, Mail, Activity, Target, Clock, Zap, Award, ArrowUpRight, PlayCircle, Menu, Bell } from "lucide-react";
 import { Link } from "react-router";
 import { useState } from "react";
 import { useScrollAnimation, useCountUpAnimation } from "@/react-app/hooks/useScrollAnimation";
 import MobileSidebar from "@/react-app/components/MobileSidebar";
+import NotificationDropdown from "@/react-app/components/NotificationDropdown";
 
 export default function Home() {
   const { user } = useAuth();
@@ -36,97 +37,97 @@ export default function Home() {
     return (
       <div className="min-h-screen particles-bg">
         {/* Hero Section */}
-        <div className="bg-gradient-to-b from-cricket-green-50 to-white py-16 px-4 relative overflow-hidden">
+        <div className="bg-gradient-to-b from-cricket-green-50 to-white py-12 sm:py-16 px-4 sm:px-6 relative overflow-hidden">
           {/* Animated background elements */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-cricket-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-72 h-72 bg-cricket-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-10 sm:top-20 -left-10 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-cricket-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-10 sm:bottom-20 -right-10 sm:right-10 w-48 sm:w-72 h-48 sm:h-72 bg-cricket-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
           
           <div className="max-w-6xl mx-auto text-center relative z-10">
-            <div className="mb-12">
-              <div className="w-24 h-24 cricket-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl bounce-in glow-pulse">
-                <Trophy className="w-12 h-12 text-white swing" />
+            <div className="mb-8 sm:mb-12">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 cricket-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-xl bounce-in glow-pulse">
+                <Trophy className="w-10 h-10 sm:w-12 sm:h-12 text-white swing" />
               </div>
-              <h1 className="font-heading text-5xl md:text-7xl font-bold bg-gradient-to-r from-cricket-green-700 via-cricket-green-600 to-cricket-blue-600 bg-clip-text text-transparent mb-6 fade-in-down">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-cricket-green-700 via-cricket-green-600 to-cricket-blue-600 bg-clip-text text-transparent mb-4 sm:mb-6 fade-in-down px-2">
                 CricketConnect Pro
               </h1>
-              <p className="text-2xl text-gray-700 mb-4 max-w-3xl mx-auto fade-in-up stagger-1">
+              <p className="text-lg sm:text-2xl text-gray-700 mb-3 sm:mb-4 max-w-3xl mx-auto fade-in-up stagger-1 px-4">
                 The Complete Cricket Team Management Ecosystem
               </p>
-              <p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto fade-in-up stagger-2">
+              <p className="text-base sm:text-xl text-gray-600 mb-6 max-w-3xl mx-auto fade-in-up stagger-2 px-4">
                 Connect with players, build dream teams, book premium grounds, and manage everything from match scheduling to real-time team communication - all in one powerful platform.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center space-x-2 slide-in-left stagger-2 hover:scale-105 transition-transform duration-300">
-                  <Users className="w-5 h-5 text-cricket-green-600 wiggle" />
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 px-2">
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 slide-in-left stagger-2 hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-cricket-green-600 wiggle flex-shrink-0" />
                   <span className="text-gray-700">Perfect for Team Captains</span>
                 </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center space-x-2 slide-in-bottom stagger-3 hover:scale-105 transition-transform duration-300">
-                  <Trophy className="w-5 h-5 text-cricket-green-600 bounce-slow" />
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 slide-in-bottom stagger-3 hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
+                  <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-cricket-green-600 bounce-slow flex-shrink-0" />
                   <span className="text-gray-700">Ideal for Club Managers</span>
                 </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center space-x-2 slide-in-right stagger-4 hover:scale-105 transition-transform duration-300">
-                  <Calendar className="w-5 h-5 text-cricket-green-600 wiggle" />
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 slide-in-right stagger-4 hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-cricket-green-600 wiggle flex-shrink-0" />
                   <span className="text-gray-700">Great for Tournament Organizers</span>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4">
                 <Link
                   to="/signup"
-                  className="cricket-btn-primary text-lg px-8 py-4 rounded-xl font-semibold glow-pulse zoom-in stagger-3 flex items-center space-x-2 min-w-[200px] relative overflow-hidden group"
+                  className="cricket-btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold glow-pulse zoom-in stagger-3 flex items-center justify-center space-x-2 w-full sm:w-auto sm:min-w-[200px] relative overflow-hidden group touch-manipulation"
                 >
                   <span className="relative z-10">Get Started Free</span>
-                  <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center relative z-10">
-                    <Star className="w-4 h-4" />
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-white/20 rounded-full flex items-center justify-center relative z-10">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 group-hover:animate-[shimmer_0.8s]"></div>
                 </Link>
-                <a href="#demo-video" className="cricket-btn-secondary text-lg px-8 py-4 rounded-xl font-semibold zoom-in stagger-4 flex items-center space-x-2 min-w-[200px] hover:shadow-2xl transition-all duration-300">
+                <a href="#demo-video" className="cricket-btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold zoom-in stagger-4 flex items-center justify-center space-x-2 w-full sm:w-auto sm:min-w-[200px] hover:shadow-2xl transition-all duration-300 touch-manipulation">
                   <span>Watch Demo</span>
-                  <div className="w-6 h-6 bg-cricket-green-100 rounded-full flex items-center justify-center">
-                    <PlayCircle className="w-4 h-4 text-cricket-green-600" />
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-cricket-green-100 rounded-full flex items-center justify-center">
+                    <PlayCircle className="w-3 h-3 sm:w-4 sm:h-4 text-cricket-green-600" />
                   </div>
                 </a>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                <div className="cricket-card-dark p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto px-2">
+                <div className="cricket-card-dark p-4 sm:p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-cricket-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-4xl font-bold text-cricket-green-600 mb-1 relative z-10">
+                  <div className="text-3xl sm:text-4xl font-bold text-cricket-green-600 mb-1 relative z-10">
                     <span className="counter-value" data-target="5000" data-suffix="+">0</span>
                   </div>
-                  <div className="text-sm text-gray-600 relative z-10">Active Players</div>
-                  <div className="text-xs text-cricket-green-600 mt-1 relative z-10">Growing Daily</div>
-                  <div className="mt-2 text-xs bg-cricket-green-50 text-cricket-green-700 px-2 py-1 rounded-full inline-block relative z-10">
-                    25% monthly growth
+                  <div className="text-xs sm:text-sm text-gray-600 relative z-10">Active Players</div>
+                  <div className="text-xs text-cricket-green-600 mt-1 relative z-10 hidden sm:block">Growing Daily</div>
+                  <div className="mt-1 sm:mt-2 text-xs bg-cricket-green-50 text-cricket-green-700 px-2 py-1 rounded-full inline-block relative z-10">
+                    25% monthly
                   </div>
                 </div>
-                <div className="cricket-card-dark p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.1s'}}>
+                <div className="cricket-card-dark p-4 sm:p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.1s'}}>
                   <div className="absolute inset-0 bg-gradient-to-br from-cricket-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-4xl font-bold text-cricket-blue-600 mb-1 relative z-10">
+                  <div className="text-3xl sm:text-4xl font-bold text-cricket-blue-600 mb-1 relative z-10">
                     <span className="counter-value" data-target="750" data-suffix="+">0</span>
                   </div>
-                  <div className="text-sm text-gray-600 relative z-10">Teams Formed</div>
-                  <div className="text-xs text-cricket-blue-600 mt-1 relative z-10">Active Teams</div>
-                  <div className="mt-2 text-xs bg-cricket-blue-50 text-cricket-blue-700 px-2 py-1 rounded-full inline-block relative z-10">
-                    98% retention rate
+                  <div className="text-xs sm:text-sm text-gray-600 relative z-10">Teams Formed</div>
+                  <div className="text-xs text-cricket-blue-600 mt-1 relative z-10 hidden sm:block">Active Teams</div>
+                  <div className="mt-1 sm:mt-2 text-xs bg-cricket-blue-50 text-cricket-blue-700 px-2 py-1 rounded-full inline-block relative z-10">
+                    98% retention
                   </div>
                 </div>
-                <div className="cricket-card-dark p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.2s'}}>
+                <div className="cricket-card-dark p-4 sm:p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.2s'}}>
                   <div className="absolute inset-0 bg-gradient-to-br from-cricket-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-4xl font-bold text-cricket-green-600 mb-1 relative z-10">
+                  <div className="text-3xl sm:text-4xl font-bold text-cricket-green-600 mb-1 relative z-10">
                     <span className="counter-value" data-target="200" data-suffix="+">0</span>
                   </div>
-                  <div className="text-sm text-gray-600 relative z-10">Premium Grounds</div>
-                  <div className="text-xs text-cricket-green-600 mt-1 relative z-10">Verified Venues</div>
-                  <div className="mt-2 text-xs bg-cricket-green-50 text-cricket-green-700 px-2 py-1 rounded-full inline-block relative z-10">
-                    4.8/5 avg rating
+                  <div className="text-xs sm:text-sm text-gray-600 relative z-10">Premium Grounds</div>
+                  <div className="text-xs text-cricket-green-600 mt-1 relative z-10 hidden sm:block">Verified Venues</div>
+                  <div className="mt-1 sm:mt-2 text-xs bg-cricket-green-50 text-cricket-green-700 px-2 py-1 rounded-full inline-block relative z-10">
+                    4.8/5 rating
                   </div>
                 </div>
-                <div className="cricket-card-dark p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.3s'}}>
+                <div className="cricket-card-dark p-4 sm:p-6 text-center hover-lift hover-glow-strong transition-all duration-300 scroll-fade-in relative overflow-hidden group" style={{transitionDelay: '0.3s'}}>
                   <div className="absolute inset-0 bg-gradient-to-br from-cricket-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="text-4xl font-bold text-cricket-blue-600 mb-1 relative z-10">
+                  <div className="text-3xl sm:text-4xl font-bold text-cricket-blue-600 mb-1 relative z-10">
                     <span className="counter-value" data-target="2500" data-suffix="+">0</span>
                   </div>
-                  <div className="text-sm text-gray-600 relative z-10">Matches Organized</div>
+                  <div className="text-xs sm:text-sm text-gray-600 relative z-10">Matches Organized</div>
                   <div className="text-xs text-cricket-blue-600 mt-1 relative z-10">Successful Games</div>
                   <div className="mt-2 text-xs bg-cricket-blue-50 text-cricket-blue-700 px-2 py-1 rounded-full inline-block relative z-10">
                     100+ weekly games
@@ -809,8 +810,8 @@ export default function Home() {
       <MobileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-20 md:pb-8 page-transition">
-        {/* Hamburger Menu Button - Mobile Only */}
-        <div className="md:hidden mb-4">
+        {/* Mobile Header - Hamburger Menu and Notifications */}
+        <div className="md:hidden mb-4 flex items-center justify-between">
           <button
             onClick={() => setIsSidebarOpen(true)}
             className="w-10 h-10 cricket-gradient rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 touch-manipulation"
@@ -818,6 +819,11 @@ export default function Home() {
           >
             <Menu className="w-5 h-5 text-white" />
           </button>
+          
+          {/* Notification Bell Icon */}
+          <div className="scale-90">
+            <NotificationDropdown />
+          </div>
         </div>
 
         {/* Header Section */}

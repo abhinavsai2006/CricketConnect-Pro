@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router";
 import { AuthProvider } from "@getmocha/users-service/react";
+import { useEffect } from "react";
 import HomePage from "./pages/Home";
 import AuthCallbackPage from "./pages/AuthCallback";
 import LoginPage from "./pages/Login";
@@ -17,11 +18,23 @@ import Layout from "@/react-app/components/Layout";
 import { ThemeProvider } from "@/react-app/contexts/ThemeContext";
 import OnboardingFlow from "@/react-app/components/OnboardingFlow";
 
+// Scroll to top component
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <ScrollToTop />
           <OnboardingFlow />
           <Routes>
             {/* Auth routes without Layout */}
