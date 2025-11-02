@@ -2,6 +2,8 @@
   "name": "cricketconnect-pro",
   "version": "1.0.0",
   "regions": ["iad1"],
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "package.json",
