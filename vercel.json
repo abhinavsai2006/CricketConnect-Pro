@@ -36,9 +36,5 @@
         }
       ]
     }
-  ],
-  "env": {
-    "AUTH_SERVICE_API_URL": "@auth_service_api_url",
-    "AUTH_SERVICE_API_KEY": "@auth_service_api_key"
-  }
+  ]
 }
