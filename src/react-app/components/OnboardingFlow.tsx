@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, ChevronRight, ChevronLeft, Check, Users, MapPin, Calendar, Trophy, Target } from "lucide-react";
+import { useLocation } from "react-router";
 
 interface OnboardingStep {
   id: number;
@@ -12,17 +13,24 @@ interface OnboardingStep {
 export default function OnboardingFlow() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
+    // Only show on dashboard (when showDashboard is true in sessionStorage)
+    const showDashboard = sessionStorage.getItem('showDashboard') === 'true';
+    const isOnHomePage = location.pathname === '/';
+    
     // Check if user has completed onboarding
     const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
-    if (!hasCompletedOnboarding) {
+    
+    // Show onboarding only on dashboard, not on landing page
+    if (!hasCompletedOnboarding && isOnHomePage && showDashboard) {
       // Show onboarding after a short delay
       setTimeout(() => {
         setIsVisible(true);
       }, 1000);
     }
-  }, []);
+  }, [location.pathname]);
 
   const steps: OnboardingStep[] = [
     {
