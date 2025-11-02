@@ -1,5 +1,5 @@
 import { useAuth } from "@getmocha/users-service/react";
-import { Trophy, Users, Calendar, MapPin, Star, TrendingUp, Mail, Activity, Target, Clock, Zap, Award, ArrowUpRight, PlayCircle, Menu, Bell } from "lucide-react";
+import { Trophy, Users, Calendar, MapPin, Star, TrendingUp, Mail, Activity, Target, Clock, Zap, Award, ArrowUpRight, PlayCircle, Menu } from "lucide-react";
 import { Link } from "react-router";
 import { useState } from "react";
 import { useScrollAnimation, useCountUpAnimation } from "@/react-app/hooks/useScrollAnimation";
