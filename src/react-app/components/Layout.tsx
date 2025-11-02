@@ -2,7 +2,6 @@ import { useAuth } from "@getmocha/users-service/react";
 import { useLocation } from "react-router";
 import DesktopNavigation from "@/react-app/components/DesktopNavigation";
 import MobileNavigation from "@/react-app/components/MobileNavigation";
-import MobileSidebar from "@/react-app/components/MobileSidebar";
 import LoadingSpinner from "@/react-app/components/LoadingSpinner";
 
 interface LayoutProps {
