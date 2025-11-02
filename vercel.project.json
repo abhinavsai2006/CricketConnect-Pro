@@ -1,0 +1,37 @@
+{
+  "name": "cricketconnect-pro",
+  "version": "1.0.0",
+  "regions": ["iad1"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "MOCHA_USERS_SERVICE_API_URL": "@mocha_users_service_api_url",
+    "MOCHA_USERS_SERVICE_API_KEY": "@mocha_users_service_api_key"
+  },
+  "build": {
+    "env": {
+      "MOCHA_USERS_SERVICE_API_URL": "@mocha_users_service_api_url",
+      "MOCHA_USERS_SERVICE_API_KEY": "@mocha_users_service_api_key"
+    }
+  }
+}

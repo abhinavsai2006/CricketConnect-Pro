@@ -1,0 +1,13 @@
+dist/
+node_modules/
+.wrangler/
+.dev.vars
+worker-configuration.d.ts
+
+# Vercel
+.vercel
+.env
+.env*.local
+
+# TypeScript
+*.tsbuildinfo

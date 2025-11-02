@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="cricketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#cricketGradient)"/>
+  
+  <!-- Cricket ball -->
+  <circle cx="50" cy="50" r="28" fill="white"/>
+  
+  <!-- Seam lines -->
+  <path d="M 35 35 Q 50 45 65 35" stroke="#dc2626" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 35 35 Q 40 50 35 65" stroke="#dc2626" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 65 35 Q 60 50 65 65" stroke="#dc2626" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 35 65 Q 50 55 65 65" stroke="#dc2626" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Stitch marks -->
+  <line x1="38" y1="37" x2="40" y2="35" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="43" y1="40" x2="45" y2="38" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="48" y1="42" x2="50" y2="40" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="53" y1="40" x2="55" y2="38" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="58" y1="37" x2="60" y2="35" stroke="#dc2626" stroke-width="1.5"/>
+  
+  <line x1="38" y1="63" x2="40" y2="65" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="43" y1="60" x2="45" y2="62" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="48" y1="58" x2="50" y2="60" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="53" y1="60" x2="55" y2="62" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="58" y1="63" x2="60" y2="65" stroke="#dc2626" stroke-width="1.5"/>
+</svg>
