@@ -136,28 +136,37 @@ export default function NotificationDropdown() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="fixed md:absolute right-0 md:right-0 top-0 md:top-auto md:mt-2 w-full md:w-96 h-full md:h-auto md:max-h-[600px] bg-white md:rounded-xl shadow-2xl border-0 md:border border-gray-200 z-[100] overflow-hidden animate-in fade-in slide-in-from-right md:slide-in-from-top-2 duration-200">
           {/* Header */}
           <div className="bg-gradient-to-r from-cricket-green-600 to-cricket-blue-600 p-4">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="flex-1">
                 <h3 className="font-bold text-white text-lg">Notifications</h3>
                 <p className="text-white/80 text-sm">{unreadCount} unread</p>
               </div>
-              {unreadCount > 0 && (
+              <div className="flex items-center space-x-2">
+                {unreadCount > 0 && (
+                  <button
+                    onClick={markAllAsRead}
+                    className="text-white hover:bg-white/20 px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 hidden md:flex items-center space-x-1"
+                  >
+                    <Check className="w-4 h-4" />
+                    <span>Mark all read</span>
+                  </button>
+                )}
                 <button
-                  onClick={markAllAsRead}
-                  className="text-white hover:bg-white/20 px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-1"
+                  onClick={() => setIsOpen(false)}
+                  className="md:hidden p-2 text-white hover:bg-white/20 rounded-lg transition-all duration-200"
+                  aria-label="Close notifications"
                 >
-                  <Check className="w-4 h-4" />
-                  <span>Mark all read</span>
+                  <X className="w-5 h-5" />
                 </button>
-              )}
+              </div>
             </div>
           </div>
 
           {/* Notifications List */}
-          <div className="max-h-96 overflow-y-auto">
+          <div className="h-[calc(100vh-180px)] md:max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
                 <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
